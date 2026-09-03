@@ -3,160 +3,20 @@ const SUPABASE_KEY='sb_publishable_qCKY-QilEX5M3-k2R3CfyQ_MfSv4UKz';
 let current=[],trainers=[],editingId=null;
 const headers={apikey:SUPABASE_KEY,'Content-Type':'application/json','Cache-Control':'no-cache'};
 const esc=v=>String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
-
-async function api(path,options={}){
-  const url=`${SUPABASE_URL}/rest/v1/${path}`;
-  const r=await fetch(url,{...options,cache:'no-store',headers:{...headers,...(options.headers||{})}});
-  const text=await r.text();
-  if(!r.ok) throw new Error(text||`HTTP ${r.status}`);
-  return text?JSON.parse(text):null;
-}
-
-async function hash(v){
-  const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v));
-  return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
-}
-
-async function getRegistrations(){return api('registrations?select=*&order=created_at.desc');}
-async function updateStatus(id,estado){return api(`registrations?id=eq.${encodeURIComponent(id)}`,{method:'PATCH',body:JSON.stringify({estado})});}
-async function getTrainers(){return api('trainers?select=id,created_at,nome,email,categorias,ativo,password_hash&order=created_at.desc');}
-
-async function render(){
-  try{
-    current=await getRegistrations();
-    document.querySelector('#total').textContent=current.length;
-    document.querySelector('#novas').textContent=current.filter(x=>x.estado==='Nova').length;
-    document.querySelector('#coffee').textContent=current.filter(x=>String(x.program||'').toUpperCase().includes('COFFEE')).length;
-    document.querySelector('#dance').textContent=current.filter(x=>String(x.program||'').toUpperCase().includes('DANÇA')).length;
-    document.querySelector('#scorpion').textContent=current.filter(x=>String(x.program||'').toUpperCase().includes('SCORPION')).length;
-    document.querySelector('#rows').innerHTML=current.length?current.map(x=>`<tr><td>${new Date(x.created_at).toLocaleString('pt-MZ')}</td><td>${esc(x.nome)}</td><td>${esc(x.program)}</td><td>${esc(x.curso)}</td><td>${esc(x.horario)}</td><td>${esc(x.dias)}</td><td>${esc(x.telefone)}<br>${esc(x.email)}</td><td><select data-id="${esc(x.id)}" class="status"><option ${x.estado==='Nova'?'selected':''}>Nova</option><option ${x.estado==='Contactado'?'selected':''}>Contactado</option><option ${x.estado==='Confirmado'?'selected':''}>Confirmado</option><option ${x.estado==='Concluído'?'selected':''}>Concluído</option><option ${x.estado==='Cancelado'?'selected':''}>Cancelado</option></select></td></tr>`).join(''):'<tr><td colspan="8">Ainda não existem inscrições.</td></tr>';
-    document.querySelectorAll('.status').forEach(s=>s.onchange=async()=>{
-      s.disabled=true;
-      try{await updateStatus(s.dataset.id,s.value);await render();}
-      catch(e){alert('Não foi possível atualizar: '+e.message);s.disabled=false;}
-    });
-  }catch(e){
-    console.error(e);
-    document.querySelector('#rows').innerHTML='<tr><td colspan="8">Erro ao carregar inscrições. '+esc(e.message)+'</td></tr>';
-  }
-}
-
-async function renderTrainers(){
-  const box=document.querySelector('#trainers');
-  try{
-    trainers=await getTrainers();
-    box.innerHTML=trainers.length?trainers.map((t,i)=>`<div class="trainer-card"><strong>${esc(t.nome)}</strong><br><span>${esc(t.email)}</span><small>${esc((t.categorias||[]).join(' • ')||'Sem categoria')} · ${t.ativo===false?'Inativo':'Ativo'}</small><div class="trainer-actions"><button type="button" onclick="editTrainer(${i})">Editar</button><button type="button" class="delete" onclick="deleteTrainer(${i})">Eliminar</button></div></div>`).join(''):'<p class="hint">Nenhum formador criado ainda.</p>';
-  }catch(e){
-    console.error(e);
-    box.innerHTML='<p class="error">Erro ao carregar formadores: '+esc(e.message)+'</p>';
-  }
-}
-
-window.editTrainer=i=>{
-  const t=trainers[i];if(!t)return;
-  editingId=t.id;
-  document.querySelector('#trainerName').value=t.nome||'';
-  document.querySelector('#trainerEmail').value=t.email||'';
-  document.querySelector('#trainerPass').value='';
-  document.querySelectorAll('input[name=trainerCat]').forEach(c=>c.checked=(t.categorias||[]).includes(c.value));
-  document.querySelector('#trainerFormTitle').textContent='Editar Formador';
-  document.querySelector('#trainerSave').textContent='Guardar alterações';
-  document.querySelector('#trainerCancel').hidden=false;
-};
-
-window.deleteTrainer=async i=>{
-  const t=trainers[i];if(!t||!confirm(`Eliminar o formador ${t.nome}?`))return;
-  try{await api(`trainers?id=eq.${encodeURIComponent(t.id)}`,{method:'DELETE'});await renderTrainers();}
-  catch(e){alert('Não foi possível eliminar: '+e.message);}
-};
-
-document.querySelector('#trainerForm').onsubmit=async e=>{
-  e.preventDefault();
-  const cats=[...document.querySelectorAll('input[name=trainerCat]:checked')].map(x=>x.value);
-  const nome=document.querySelector('#trainerName').value.trim();
-  const email=document.querySelector('#trainerEmail').value.trim().toLowerCase();
-  const password=document.querySelector('#trainerPass').value.trim();
-  if(!nome||!email){alert('Preencha o nome e o e-mail/utilizador.');return;}
-  if(!cats.length){alert('Selecione pelo menos uma categoria.');return;}
-  const btn=document.querySelector('#trainerSave');btn.disabled=true;
-  try{
-    const body={nome,email,categorias:cats,ativo:true};
-    if(password)body.password_hash=await hash(password);
-    if(editingId){
-      await api(`trainers?id=eq.${encodeURIComponent(editingId)}`,{method:'PATCH',body:JSON.stringify(body)});
-    }else{
-      if(!password){alert('Defina uma palavra-passe inicial.');btn.disabled=false;return;}
-      body.id=Date.now();
-      await api('trainers',{method:'POST',headers:{...headers,Prefer:'return=representation'},body:JSON.stringify(body)});
-    }
-    editingId=null;e.target.reset();
-    document.querySelector('#trainerFormTitle').textContent='Criar Formador';
-    document.querySelector('#trainerSave').textContent='Criar acesso do formador';
-    document.querySelector('#trainerCancel').hidden=true;
-    await renderTrainers();
-    alert('Formador guardado com sucesso.');
-  }catch(e){console.error(e);alert('ERRO AO GUARDAR FORMADOR:\n'+e.message);}
-  finally{btn.disabled=false;}
-};
-
-document.querySelector('#trainerCancel').onclick=()=>{
-  editingId=null;document.querySelector('#trainerForm').reset();
-  document.querySelector('#trainerFormTitle').textContent='Criar Formador';
-  document.querySelector('#trainerSave').textContent='Criar acesso do formador';
-  document.querySelector('#trainerCancel').hidden=true;
-};
-
-async function getUpdates(){return api('trainer_updates?select=*&order=created_at.desc');}
-async function renderUpdatesAdmin(){
-  const box=document.querySelector('#updatesAdmin');
-  try{
-    const a=await getUpdates();
-    box.innerHTML=a.length?a.map(x=>`<div class="notice"><strong>${esc(x.title)}</strong><br><small>${esc(x.category)} · ${esc(x.audience)} · ${new Date(x.created_at).toLocaleString('pt-MZ')}</small><p>${esc(x.message).replaceAll('\n','<br>')}</p></div>`).join(''):'<p class="hint">Ainda não existem actualizações publicadas.</p>';
-  }catch(e){console.error(e);box.innerHTML='<p class="error">Não foi possível carregar actualizações: '+esc(e.message)+'</p>';}
-}
-
-document.querySelector('#updateForm').onsubmit=async e=>{
-  e.preventDefault();
-  const btn=e.target.querySelector('button');
-  const payload={title:document.querySelector('#updateTitle').value.trim(),category:document.querySelector('#updateCategory').value,audience:document.querySelector('#updateAudience').value,message:document.querySelector('#updateMessage').value.trim()};
-  btn.disabled=true;
-  try{await api('trainer_updates',{method:'POST',body:JSON.stringify(payload)});e.target.reset();await renderUpdatesAdmin();alert('Actualização publicada.');}
-  catch(err){alert('Não foi possível publicar: '+err.message);}
-  finally{btn.disabled=false;}
-};
-
-document.querySelector('#logout').onclick=()=>{sessionStorage.removeItem('drinklab_admin');location.replace('./acesso.html');};
-
-document.querySelector('#export').onclick=()=>{
-  const h=['Data','Nome','Programa','Curso','Horário','Frequência','Dias','Telefone','Email','Estado'];
-  const lines=[h,...current.map(x=>[new Date(x.created_at).toLocaleString('pt-MZ'),x.nome,x.program,x.curso,x.horario,x.frequencia,x.dias,x.telefone,x.email,x.estado])].map(r=>r.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(';'));
-  const blob=new Blob(['\ufeff'+lines.join('\n')],{type:'text/csv'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='drinklab-inscricoes.csv';a.click();
-};
-
-(async()=>{await render();await renderTrainers();await renderUpdatesAdmin();})();
-setInterval(()=>{if(!document.hidden){render();renderTrainers();renderUpdatesAdmin();}},10000);
-
-const pubSection=document.createElement('section');
-pubSection.className='box';pubSection.style.marginTop='30px';
-pubSection.innerHTML='<h2 class="section-title" style="margin-top:0">Criar Publicação</h2><p class="hint">O administrador pode publicar texto, posts com imagem ou vídeos. A publicação aparecerá na área pública correspondente.</p><form id="publishForm"><label>Título da publicação<input id="pubTitle" placeholder="Ex.: Nova turma de Barista" required></label><label>Área<select id="pubArea"><option value="DRINKLAB 95 ACADEMY">DrinkLab Academy</option><option value="ACADEMIA DE DANÇA">Academia de Dança</option><option value="SCORPION SERVICE">Scorpion Service</option><option value="DRINKLAB 95 • SERVIÇOS TÉCNICOS">Serviços Técnicos</option></select></label><label>Tipo<select id="pubType"><option value="text">Texto / Post</option><option value="image">Post com imagem</option><option value="video">Post com vídeo</option></select></label><label>Imagem / Vídeo (URL)<input id="pubMedia" placeholder="Cole aqui o endereço do ficheiro/media, se houver"></label><label>Texto da publicação<textarea id="pubContent" rows="7" required placeholder="Escreva o conteúdo da publicação..."></textarea></label><label style="display:flex;align-items:center;gap:9px"><input id="pubPublished" type="checkbox" checked style="width:auto"> Publicar imediatamente</label><button class="goldbtn" type="submit">Publicar agora</button><p id="pubResult" class="hint"></p></form>';
-const updatesBox=document.querySelector('#updateForm')?.closest('.box');
-if(updatesBox)updatesBox.parentNode.insertBefore(pubSection,updatesBox);
-
-document.querySelector('#publishForm').onsubmit=async e=>{
-  e.preventDefault();
-  const btn=e.target.querySelector('button[type=submit]');
-  const type=document.querySelector('#pubType').value;
-  const media=document.querySelector('#pubMedia').value.trim();
-  const payload={title:document.querySelector('#pubTitle').value.trim(),content:document.querySelector('#pubContent').value.trim(),audience:document.querySelector('#pubArea').value,published:document.querySelector('#pubPublished').checked};
-  if(media)payload.media_url=media;
-  if(type==='image'||type==='video')payload.media_type=type;
-  btn.disabled=true;
-  try{
-    await api('posts',{method:'POST',headers:{...headers,Prefer:'return=representation'},body:JSON.stringify(payload)});
-    e.target.reset();document.querySelector('#pubPublished').checked=true;
-    document.querySelector('#pubResult').textContent='Publicação criada com sucesso.';
-    setTimeout(()=>document.querySelector('#pubResult').textContent='',3500);
-  }catch(err){console.error(err);document.querySelector('#pubResult').textContent='Não foi possível publicar: '+err.message;}
-  finally{btn.disabled=false;}
-};
+async function api(path,options={}){const url=`${SUPABASE_URL}/rest/v1/${path}`;const r=await fetch(url,{...options,cache:'no-store',headers:{...headers,...(options.headers||{})}});const text=await r.text();if(!r.ok)throw new Error(text||`HTTP ${r.status}`);return text?JSON.parse(text):null}
+async function hash(v){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+async function getRegistrations(){return api('registrations?select=*&order=created_at.desc')}
+async function updateStatus(id,estado){return api(`registrations?id=eq.${encodeURIComponent(id)}`,{method:'PATCH',body:JSON.stringify({estado})})}
+async function getTrainers(){return api('trainers?select=id,created_at,nome,email,categorias,ativo,password_hash&order=created_at.desc')}
+async function render(){try{current=await getRegistrations();document.querySelector('#total').textContent=current.length;document.querySelector('#novas').textContent=current.filter(x=>x.estado==='Nova').length;document.querySelector('#coffee').textContent=current.filter(x=>String(x.program||'').toUpperCase().includes('COFFEE')).length;document.querySelector('#dance').textContent=current.filter(x=>String(x.program||'').toUpperCase().includes('DANÇA')).length;document.querySelector('#scorpion').textContent=current.filter(x=>String(x.program||'').toUpperCase().includes('SCORPION')).length;document.querySelector('#rows').innerHTML=current.length?current.map(x=>`<tr><td>${new Date(x.created_at).toLocaleString('pt-MZ')}</td><td>${esc(x.nome)}</td><td>${esc(x.program)}</td><td>${esc(x.curso)}</td><td>${esc(x.horario)}</td><td>${esc(x.dias)}</td><td>${esc(x.telefone)}<br>${esc(x.email)}</td><td><select data-id="${esc(x.id)}" class="status"><option ${x.estado==='Nova'?'selected':''}>Nova</option><option ${x.estado==='Contactado'?'selected':''}>Contactado</option><option ${x.estado==='Confirmado'?'selected':''}>Confirmado</option><option ${x.estado==='Concluído'?'selected':''}>Concluído</option><option ${x.estado==='Cancelado'?'selected':''}>Cancelado</select></td></tr>`).join(''):'<tr><td colspan="8">Ainda não existem inscrições.</td></tr>';document.querySelectorAll('.status').forEach(s=>s.onchange=async()=>{s.disabled=true;try{await updateStatus(s.dataset.id,s.value);await render()}catch(e){alert('Não foi possível atualizar: '+e.message);s.disabled=false}})}catch(e){console.error(e);document.querySelector('#rows').innerHTML='<tr><td colspan="8">Erro ao carregar inscrições. '+esc(e.message)+'</td></tr>'}}
+async function renderTrainers(){const box=document.querySelector('#trainers');try{trainers=await getTrainers();box.innerHTML=trainers.length?trainers.map((t,i)=>`<div class="trainer-card"><strong>${esc(t.nome)}</strong><br><span>${esc(t.email)}</span><small>${esc((t.categorias||[]).join(' • ')||'Sem categoria')} · ${t.ativo===false?'Inativo':'Ativo'}</small><div class="trainer-actions"><button type="button" onclick="editTrainer(${i})">Editar</button><button type="button" class="delete" onclick="deleteTrainer(${i})">Eliminar</button></div></div>`).join(''):'<p class="hint">Nenhum formador criado ainda.</p>'}catch(e){console.error(e);box.innerHTML='<p class="error">Erro ao carregar formadores: '+esc(e.message)+'</p>'}}
+window.editTrainer=i=>{const t=trainers[i];if(!t)return;editingId=t.id;document.querySelector('#trainerName').value=t.nome||'';document.querySelector('#trainerEmail').value=t.email||'';document.querySelector('#trainerPass').value='';document.querySelectorAll('input[name=trainerCat]').forEach(c=>c.checked=(t.categorias||[]).includes(c.value));document.querySelector('#trainerFormTitle').textContent='Editar Formador';document.querySelector('#trainerSave').textContent='Guardar alterações';document.querySelector('#trainerCancel').hidden=false};
+window.deleteTrainer=async i=>{const t=trainers[i];if(!t||!confirm(`Eliminar o formador ${t.nome}?`))return;try{await api(`trainers?id=eq.${encodeURIComponent(t.id)}`,{method:'DELETE'});await renderTrainers()}catch(e){alert('Não foi possível eliminar: '+e.message)}};
+document.querySelector('#trainerForm').onsubmit=async e=>{e.preventDefault();const cats=[...document.querySelectorAll('input[name=trainerCat]:checked')].map(x=>x.value);const nome=document.querySelector('#trainerName').value.trim();const email=document.querySelector('#trainerEmail').value.trim().toLowerCase();const password=document.querySelector('#trainerPass').value.trim();if(!nome||!email){alert('Preencha o nome e o e-mail/utilizador.');return}if(!cats.length){alert('Selecione pelo menos uma categoria.');return}const btn=document.querySelector('#trainerSave');btn.disabled=true;try{const body={nome,email,categorias:cats,ativo:true};if(password)body.password_hash=await hash(password);if(editingId)await api(`trainers?id=eq.${encodeURIComponent(editingId)}`,{method:'PATCH',body:JSON.stringify(body)});else{if(!password){alert('Defina uma palavra-passe inicial.');btn.disabled=false;return}body.id=Date.now();await api('trainers',{method:'POST',headers:{...headers,Prefer:'return=representation'},body:JSON.stringify(body)})}editingId=null;e.target.reset();document.querySelector('#trainerFormTitle').textContent='Criar Formador';document.querySelector('#trainerSave').textContent='Criar acesso do formador';document.querySelector('#trainerCancel').hidden=true;await renderTrainers();alert('Formador guardado com sucesso.')}catch(e){console.error(e);alert('ERRO AO GUARDAR FORMADOR:\n'+e.message)}finally{btn.disabled=false}};
+document.querySelector('#trainerCancel').onclick=()=>{editingId=null;document.querySelector('#trainerForm').reset();document.querySelector('#trainerFormTitle').textContent='Criar Formador';document.querySelector('#trainerSave').textContent='Criar acesso do formador';document.querySelector('#trainerCancel').hidden=true};
+async function getUpdates(){return api('trainer_updates?select=*&order=created_at.desc')}
+async function renderUpdatesAdmin(){const box=document.querySelector('#updatesAdmin');try{const a=await getUpdates();box.innerHTML=a.length?a.map(x=>`<div class="notice"><strong>${esc(x.title)}</strong><br><small>${esc(x.category)} · ${esc(x.audience)} · ${new Date(x.created_at).toLocaleString('pt-MZ')}</small><p>${esc(x.message).replaceAll('\n','<br>')}</p></div>`).join(''):'<p class="hint">Ainda não existem actualizações publicadas.</p>'}catch(e){console.error(e);box.innerHTML='<p class="error">Não foi possível carregar actualizações: '+esc(e.message)+'</p>'}}
+document.querySelector('#updateForm').onsubmit=async e=>{e.preventDefault();const btn=e.target.querySelector('button');const payload={title:document.querySelector('#updateTitle').value.trim(),category:document.querySelector('#updateCategory').value,audience:document.querySelector('#updateAudience').value,message:document.querySelector('#updateMessage').value.trim()};btn.disabled=true;try{await api('trainer_updates',{method:'POST',body:JSON.stringify(payload)});e.target.reset();await renderUpdatesAdmin();alert('Actualização publicada.')}catch(err){alert('Não foi possível publicar: '+err.message)}finally{btn.disabled=false}};
+document.querySelector('#logout').onclick=()=>{sessionStorage.removeItem('drinklab_admin');location.replace('./acesso.html')};
+document.querySelector('#export').onclick=()=>{const h=['Data','Nome','Programa','Curso','Horário','Frequência','Dias','Telefone','Email','Estado'];const lines=[h,...current.map(x=>[new Date(x.created_at).toLocaleString('pt-MZ'),x.nome,x.program,x.curso,x.horario,x.frequencia,x.dias,x.telefone,x.email,x.estado])].map(r=>r.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(';'));const blob=new Blob(['\ufeff'+lines.join('\n')],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='drinklab-inscricoes.csv';a.click()};
+(async()=>{await render();await renderTrainers();await renderUpdatesAdmin();})();setInterval(()=>{if(!document.hidden){render();renderTrainers();renderUpdatesAdmin()}},10000);const pubSection=document.createElement('section');pubSection.className='box';pubSection.style.marginTop='30px';pubSection.innerHTML='<h2 class="section-title" style="margin-top:0">Criar Publicação</h2><p class="hint">O administrador pode publicar texto, posts com imagem ou vídeos. A publicação aparecerá na área pública correspondente.</p><form id="publishForm"><label>Título da publicação<input id="pubTitle" placeholder="Ex.: Nova turma de Barista" required></label><label>Área<select id="pubArea"><option value="DRINKLAB 95 ACADEMY">DrinkLab Academy</option><option value="ACADEMIA DE DANÇA">Academia de Dança</option><option value="SCORPION SERVICE">Scorpion Service</option><option value="DRINKLAB 95 • SERVIÇOS TÉCNICOS">Serviços Técnicos</option></select></label><label>Tipo<select id="pubType"><option value="text">Texto / Post</option><option value="image">Post com imagem</option><option value="video">Post com vídeo</option></select></label><label>Imagem / Vídeo (URL)<input id="pubMedia" placeholder="Cole aqui o endereço do ficheiro/media, se houver"></label><label>Texto da publicação<textarea id="pubContent" rows="7" required placeholder="Escreva o conteúdo da publicação..."></textarea></label><label style="display:flex;align-items:center;gap:9px"><input id="pubPublished" type="checkbox" checked style="width:auto"> Publicar imediatamente</label><button class="goldbtn" type="submit">Publicar agora</button><p id="pubResult" class="hint"></p></form>';const updatesBox=document.querySelector('#updateForm')?.closest('.box');if(updatesBox)updatesBox.parentNode.insertBefore(pubSection,updatesBox);document.querySelector('#publishForm').onsubmit=async e=>{e.preventDefault();const btn=e.target.querySelector('button[type=submit]');const type=document.querySelector('#pubType').value;const media=document.querySelector('#pubMedia').value.trim();const payload={title:document.querySelector('#pubTitle').value.trim(),content:document.querySelector('#pubContent').value.trim(),audience:document.querySelector('#pubArea').value,published:document.querySelector('#pubPublished').checked};if(media)payload.media_url=media;if(type==='image'||type==='video')payload.media_type=type;btn.disabled=true;try{await api('posts',{method:'POST',headers:{...headers,Prefer:'return=representation'},body:JSON.stringify(payload)});e.target.reset();document.querySelector('#pubPublished').checked=true;document.querySelector('#pubResult').textContent='Publicação criada com sucesso.';setTimeout(()=>document.querySelector('#pubResult').textContent='',3500)}catch(err){console.error(err);document.querySelector('#pubResult').textContent='Não foi possível publicar: '+err.message}finally{btn.disabled=false}};const cm=document.createElement('script');cm.src='assets/js/content-manager-admin.js?v=20260903-1';document.body.appendChild(cm);
