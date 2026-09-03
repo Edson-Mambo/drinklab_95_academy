@@ -1,4 +1,4 @@
-(()=>{
+(()=>{if(window.__drinklabContentManagerLoaded)return;window.__drinklabContentManagerLoaded=true;
 const U='https://tkdqmpmiunkupmmumxmk.supabase.co',K='sb_publishable_qCKY-QilEX5M3-k2R3CfyQ_MfSv4UKz';
 const H={apikey:K,'Content-Type':'application/json'};
 let items=[],editing=null,activeType=null;
@@ -25,7 +25,7 @@ function openForm(item=null){
  const x=item||{content_type:t,title:'',category:'',description:'',media_url:'',event_date:'',location:'',trainer:'',participants:'',published:true};
  const area=body.querySelector('#contentFormArea');
  area.innerHTML=`<div class="box" style="margin-top:18px"><h3>${item?'Editar':'Criar'} ${label(t)}</h3><form id="contentForm"><label>Título<input id="contentTitle" required value="${esc(x.title)}"></label><label>Categoria / Área<input id="contentCategory" value="${esc(x.category)}" placeholder="Ex.: Coffee Training, Dança, Scorpion Service"></label><label>Descrição / Texto<textarea id="contentDescription" rows="6" required>${esc(x.description)}</textarea></label><label>Imagem ou vídeo<input id="contentMedia" value="${esc(x.media_url)}" placeholder="Cole o caminho/URL do ficheiro"></label><label>Data<input id="contentDate" type="date" value="${esc(x.event_date)}"></label><label>Local<input id="contentLocation" value="${esc(x.location)}"></label><label>Formador / Responsável<input id="contentTrainer" value="${esc(x.trainer)}"></label><label>Participantes<input id="contentParticipants" value="${esc(x.participants)}"></label><label style="display:flex;align-items:center;gap:8px"><input id="contentPublished" type="checkbox" ${x.published!==false?'checked':''} style="width:auto"> Publicado no site</label><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="goldbtn" type="submit">${item?'Guardar alterações':'Criar conteúdo'}</button><button type="button" id="cancelContent">Cancelar</button></div><p id="contentMsg" class="hint"></p></form></div>`;
- area.querySelector('#cancelContent').onclick=()=>{area.innerHTML=''};
+ area.querySelector('#cancelContent').onclick=()=>{area.innerHTML='';editing=null};
  area.querySelector('#contentForm').onsubmit=save;
  area.scrollIntoView({behavior:'smooth',block:'center'});
 }
