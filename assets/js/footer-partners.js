@@ -7,14 +7,12 @@
   const scorpionCard=document.querySelector('.cards button[data-program="scorpion"]');
   if(scorpionCard) scorpionCard.remove();
 
-  const scorpionNav=document.querySelector('a[href="#scorpion"]');
-  if(scorpionNav) scorpionNav.textContent='Scorpion · Parceiro';
+  // Scorpion é parceiro, não serviço: remover a secção própria de serviço.
+  const scorpionSection=document.querySelector('#scorpion');
+  if(scorpionSection) scorpionSection.remove();
 
-  const scorpionTitle=document.querySelector('#scorpion .eyebrow');
-  if(scorpionTitle) scorpionTitle.textContent='03 · SCORPION · PARCEIRO';
-
-  const scorpionLink=document.querySelector('#scorpion a[href="#programas"]');
-  if(scorpionLink) scorpionLink.remove();
+  // Remover referências de navegação para a antiga área de serviço.
+  document.querySelectorAll('a[href="#scorpion"]').forEach(a=>a.remove());
 
   const footer=document.querySelector('.site-footer');
   if(!footer)return;
