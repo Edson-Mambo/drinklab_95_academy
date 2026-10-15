@@ -254,3 +254,110 @@ form button{background:#d6a84f;color:#64101e}
   .section-heading p:last-child,.team-intro p:last-child{color:#6d5558}
   .cards button{background:#fff}
 }
+
+
+/* DrinkLab 95 — direcção visual clássica e intemporal */
+:root{--bg:#fffdf9;--card:#fff;--gold:#b58a3b;--gold2:#d4b36a;--text:#32151b;--muted:#6d5b5d;--line:#e5d8bd;color-scheme:light}
+html,body{background:#fffdf9!important;color:#32151b!important;font-family:Inter,Arial,sans-serif}
+body:before{background:linear-gradient(180deg,rgba(212,179,106,.07),transparent 32%)!important}
+header{background:#fffdf9!important;border:1px solid #e5d8bd!important;border-radius:8px!important;box-shadow:0 5px 18px rgba(50,21,27,.07)!important;backdrop-filter:none!important}
+.brand-wordmark{color:#32151b!important;letter-spacing:.07em}
+.brand-wordmark em{background:none!important;color:#8b1e2d!important;-webkit-text-fill-color:#8b1e2d!important}
+header nav a{color:#4b2930!important;letter-spacing:.09em!important;font-size:10px!important}
+header nav a:hover{color:#a47b32!important}
+header>span{color:#8b1e2d!important}
+.intro{background:#64101e!important;border-bottom:3px solid #b58a3b!important}
+.intro-orb{animation:none!important;border-color:rgba(212,179,106,.12)!important;box-shadow:none!important}
+.intro-orb:before,.intro-orb:after{border-color:rgba(212,179,106,.08)!important}
+.intro-mark{border-radius:4px!important;background:transparent!important;box-shadow:none!important;animation:none!important}
+.intro h1{font-weight:600!important;letter-spacing:-.035em!important}
+.intro h1 b,.intro p,.eyebrow{color:#d9bb77!important}
+.intro>div:not(.intro-orb):not(.intro-mark):not(.scroll-hint){color:#f8f3eb!important;letter-spacing:.12em!important}
+.hero-cta{border-radius:3px!important;background:transparent!important;color:#fff!important;border-color:#d9bb77!important;letter-spacing:.12em!important}
+.hero-cta:hover{background:#d9bb77!important;color:#32151b!important;box-shadow:none!important;transform:translateY(-1px)!important}
+.scroll-hint{color:#e8ded3!important}
+.about{gap:1px!important;background:#d9bb77!important;border:1px solid #d9bb77!important;box-shadow:none!important}
+.about>div{background:#fffdf9!important;padding:clamp(28px,4vw,46px)!important}
+.about>div:first-child{background:#64101e!important}
+.about h2,.section-heading h2,.team-intro h2{font-weight:600!important;letter-spacing:-.025em!important}
+.about p:not(.eyebrow){color:#665457!important;line-height:1.85!important}
+.about>div:first-child p:not(.eyebrow){color:#f8f3eb!important}
+.about strong{color:#9b762f!important}
+.about>div:first-child strong{color:#e3c982!important}
+.values span{border:1px solid rgba(181,138,59,.45)!important;background:transparent!important;color:#5d343a!important;letter-spacing:.12em!important}
+.about>div:first-child .values span{color:#fff!important;border-color:rgba(217,187,119,.5)!important}
+.featured{background:#f6f0e5!important;border-top:0!important;border-bottom:0!important}
+.featured h2,.featured p:not(.eyebrow){color:#32151b!important}
+.featured .eyebrow,.featured>a,.signature{color:#8b1e2d!important}
+.program-section,.team-section{color:#32151b!important}
+.section-heading p:last-child,.team-intro p:last-child{color:#6d5b5d!important}
+.cards{gap:16px!important}
+.cards button,.team-card{border-radius:4px!important;background:#fff!important;border:1px solid #e5d8bd!important;box-shadow:none!important;color:#32151b!important}
+.cards button:before,.team-card:before{height:2px!important;width:42px!important;background:#b58a3b!important}
+.cards button:hover,.team-card:hover{transform:translateY(-3px)!important;border-color:#b58a3b!important;box-shadow:0 10px 25px rgba(50,21,27,.08)!important}
+.cards button:hover:before,.team-card:hover:before{width:100%!important}
+.cards small,.team-number{color:#8b1e2d!important}
+.cards i,.team-icon{color:#9c772f!important}
+.cards h2,.team-card strong{color:#32151b!important}
+.cards h3,.team-card small{color:#8b1e2d!important}
+.cards p,.team-card em{color:#6d5b5d!important}
+.cards strong{color:#8b1e2d!important}
+.team-icon{border-radius:3px!important;background:#faf5eb!important;border-color:#e5d8bd!important}
+.member-backdrop{background:rgba(38,10,15,.68)!important;backdrop-filter:none!important}
+.member-panel,.panel{background:#fffdf9!important;color:#32151b!important;border:1px solid #d9bb77!important;border-radius:5px!important;box-shadow:0 20px 50px rgba(50,21,27,.12)!important}
+.member-panel h2,.panel h2{color:#32151b!important}
+.member-panel h3,.panel>#kind{color:#8b1e2d!important}
+.member-panel>p:not(.eyebrow),.panel>p{color:#6d5b5d!important}
+.member-divider{background:#e5d8bd!important}
+.member-focus{background:#f8f2e7!important;border-left-color:#b58a3b!important}
+.member-focus span,.member-focus strong{color:#5d343a!important}
+label{color:#4b2930!important}
+input,select,textarea{background:#fff!important;color:#32151b!important;border:1px solid #d8cbb3!important;border-radius:3px!important}
+input:focus,select:focus,textarea:focus{outline:2px solid rgba(181,138,59,.2)!important;border-color:#b58a3b!important}
+form button{background:#64101e!important;color:#fff!important;border-radius:3px!important}
+#back{color:#8b1e2d!important}
+#success{background:#f8f2e7!important;border-color:#d9bb77!important;color:#32151b!important}
+.site-footer{background:#32151b!important;border-top:2px solid #b58a3b!important}
+.footer-brand strong,.footer-column h3,.footer-access h3{color:#d9bb77!important}
+.footer-brand span,.footer-brand p,.footer-access p,.footer-column a{color:#f4eee6!important}
+.footer-column a:hover{color:#d9bb77!important}
+.footer-login{border-radius:3px!important;border-color:#d9bb77!important}
+.footer-login:hover{background:#d9bb77!important;color:#32151b!important}
+.footer-bottom{border-top-color:rgba(217,187,119,.28)!important;color:#e2d7ce!important}
+/* Mesmo padrão clássico nas páginas de acesso, administração, publicações e serviços */
+.access-page,.service-page{background:#fffdf9!important;color:#32151b!important}
+.access-glow{display:none!important}
+.access-box,.access-form,.portal-card,.access-roles button,.box,.stat,.trainer-card,.site-media-card,.notice,.post{background:#fff!important;color:#32151b!important;border:1px solid #e5d8bd!important;border-radius:4px!important;box-shadow:none!important}
+.access-box{border-top:3px solid #64101e!important}
+.access-brand h1,.dash h1,.service-head h1,.posts-head h1{color:#32151b!important}
+.access-brand>p:last-child,.admin-subtitle,.hint,.portal-card span,.access-roles small,.post p,.service-option p,.service-head p{color:#6d5b5d!important}
+.portal-card strong,.access-roles strong,.stat b,.site-media-info strong,.notice strong{color:#8b1e2d!important}
+.portal-card small,.access-roles span,.site-media-info small{color:#9b762f!important}
+.access-roles button:hover,.portal-card:hover{background:#faf5eb!important;border-color:#b58a3b!important;box-shadow:none!important}
+.admin-header-center strong{color:#32151b!important}
+.admin-kicker,.admin-live,.admin-site-link{color:#8b1e2d!important}
+.logout,.trainer-actions button{background:#fff!important;color:#64101e!important;border:1px solid #d8cbb3!important}
+.goldbtn,.access-form>button[type=submit],.service-actions button{background:#64101e!important;color:#fff!important;border-radius:3px!important;box-shadow:none!important}
+.tablewrap{background:#fff!important;border-color:#e5d8bd!important;border-radius:4px!important;box-shadow:none!important}
+.tablewrap th{background:#64101e!important;color:#f0dca9!important}
+.tablewrap td{color:#4b2930!important;border-bottom-color:#eee6d8!important}
+.box input,.box select,.box textarea,.access-form input{background:#fff!important;color:#32151b!important;border-color:#d8cbb3!important}
+.trainer-card strong{color:#32151b!important}
+.trainer-card small{color:#8b1e2d!important}
+.admin-content-nav button.active{outline-color:#b58a3b!important;box-shadow:none!important}
+.service-option{background:#fff!important;color:#32151b!important;border:1px solid #e5d8bd!important;border-radius:4px!important;box-shadow:none!important}
+.service-option:hover,.service-option.active{background:#faf5eb!important;border-color:#b58a3b!important;box-shadow:inset 3px 0 #64101e!important;transform:none!important}
+.service-option small,.post-meta{color:#9b762f!important}
+.service-option h2,.service-form h2,.hygiene-note strong{color:#32151b!important}
+.service-form{background:#fff!important;color:#32151b!important;border:1px solid #e5d8bd!important;border-top:3px solid #64101e!important;border-radius:4px!important}
+.service-form input,.service-form textarea{background:#fff!important;color:#32151b!important;border-color:#d8cbb3!important}
+.check{background:#fff!important;color:#4b2930!important;border-color:#e5d8bd!important}
+.hygiene-note{background:#faf5eb!important;color:#5d343a!important;border-left-color:#b58a3b!important}
+.back-home,.back{color:#8b1e2d!important}
+.posts-head p,.post-author{color:#6d5b5d!important}
+.post-body{background:#fff!important}
+.post{overflow:hidden!important}
+.post h2{color:#32151b!important}
+.notice-badge{border-color:#b58a3b!important;color:#8b1e2d!important;border-radius:3px!important}
+.empty{color:#6d5b5d!important;border-color:#e5d8bd!important;border-radius:4px!important}
+@media(max-width:700px){header{border-radius:5px!important}.intro{min-height:88svh!important}.about>div,.about>div:first-child{padding:26px 22px!important}.footer-main{gap:24px 18px!important}.access-box{padding:30px 18px!important}.service-form{padding:22px!important}}
