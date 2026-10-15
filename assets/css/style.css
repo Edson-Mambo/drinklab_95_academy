@@ -418,3 +418,9 @@ form button{background:#64101e!important;color:#fff!important;border-radius:3px!
  header nav a{font-size:8px!important}
  .intro{padding-top:150px!important}
 }
+
+/* Redes sociais e metadados visuais */
+.footer-socials{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.footer-socials a{display:inline-flex;align-items:center;gap:6px;padding:8px 11px;border:1px solid rgba(217,187,119,.45);color:#f4eee6;text-decoration:none;font-size:10px;letter-spacing:.08em;text-transform:uppercase;transition:background .2s ease,color .2s ease,border-color .2s ease}
+.footer-socials a:hover{background:#d9bb77;border-color:#d9bb77;color:#32151b}
+@media(max-width:700px){.footer-socials{gap:8px}.footer-socials a{padding:9px 12px}}
