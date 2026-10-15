@@ -1,1 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700"><image href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////2wBDAf//////////////////////////////////////////////////////////////////////////////////////wAARCAEsASwDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAX/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIQAxAAAAH/AP/EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAQUCf//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQMBAT8Bf//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8Bf//EABQQAQAAAAAAAAAAAAAAAAAAABD/2gAIAQEABj8Cf//Z" x="0" y="0" width="700" height="700" preserveAspectRatio="xMidYMid slice"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 180" role="img" aria-labelledby="title desc">
+  <title id="title">DrinkLab 95</title>
+  <desc id="desc">Logótipo DrinkLab 95 em dourado e branco, com símbolo de laboratório e café e a assinatura Experiência, Qualidade, Paixão.</desc>
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4d58a"/><stop offset=".52" stop-color="#c9973d"/><stop offset="1" stop-color="#a96f1c"/></linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#gold)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M55 28v24L29 98a22 22 0 0 0 19 33h63a22 22 0 0 0 19-33L104 52V28"/>
+    <path d="M48 28h23M88 28h23M43 91h65"/>
+    <path d="M65 14c-10-10 11-13 4-22" transform="translate(0 15)"/>
+    <path d="M79 72c-6-12 8-17 1-27"/>
+    <path d="M79 102c-14 0-23 9-23 18h46c0-9-9-18-23-18z"/>
+    <path d="M130 104h12a17 17 0 0 1 0 34h-12"/>
+  </g>
+  <text x="170" y="91" font-family="Georgia, 'Times New Roman', serif" font-size="67" letter-spacing="2" fill="#f8f4eb">DRINKLAB</text>
+  <text x="548" y="91" font-family="Georgia, 'Times New Roman', serif" font-size="72" fill="url(#gold)">95</text>
+  <path d="M173 111H668" stroke="url(#gold)" stroke-width="1.5"/>
+  <text x="173" y="142" font-family="Arial, Helvetica, sans-serif" font-size="17" letter-spacing="4.1" fill="url(#gold)">EXPERIÊNCIA • QUALIDADE • PAIXÃO</text>
+</svg>
