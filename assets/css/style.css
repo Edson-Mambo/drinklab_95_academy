@@ -144,3 +144,113 @@ button,input,select,textarea{max-width:100%}
   .footer-main{grid-template-columns:minmax(0,1fr)}
   .footer-brand,.footer-access{grid-column:auto}
 }
+
+
+/* Refinamento visual: vermelho como acento, não como fundo dominante */
+:root{
+  --bg:#fffaf4;
+  --card:#ffffff;
+  --gold:#d6a84f;
+  --gold2:#b8872c;
+  --text:#64101e;
+  --muted:#6d5558;
+}
+html,body{background:#fffaf4;color:#64101e}
+body:before{
+  background:
+    radial-gradient(ellipse at 50% 0,rgba(214,168,79,.13),transparent 42%),
+    linear-gradient(180deg,#fffaf4 0%,#fff 38%,#fffaf4 100%);
+}
+header{
+  background:rgba(255,255,255,.96);
+  border-color:rgba(184,135,44,.55);
+  box-shadow:0 10px 34px rgba(100,16,30,.12);
+  backdrop-filter:blur(16px);
+}
+header nav a{color:#64101e}
+header nav a:hover,header nav a:focus-visible{color:#b8872c}
+.brand-wordmark{color:#64101e}
+.intro{
+  background:
+    radial-gradient(ellipse at 50% 35%,rgba(214,168,79,.16),transparent 45%),
+    linear-gradient(145deg,#64101e 0%,#84172a 55%,#64101e 100%);
+  color:#fff;
+  border-bottom:3px solid #d6a84f;
+}
+.intro-orb{border-color:rgba(255,255,255,.12);box-shadow:0 0 90px rgba(214,168,79,.12),inset 0 0 70px rgba(255,255,255,.025)}
+.intro-mark{background:#64101e;border-color:#d6a84f}
+.intro h1{color:#fff}
+.intro h1 b,.intro p,.eyebrow{color:#f0cf79}
+.intro>div:not(.intro-orb):not(.intro-mark):not(.scroll-hint){color:#fff}
+.hero-cta{border-color:#f0cf79;color:#fff;background:rgba(255,255,255,.04)}
+.hero-cta:hover{background:#d6a84f;color:#64101e}
+.scroll-hint{color:#fff!important}
+.about{
+  background:#d6a84f;border-color:#d6a84f;gap:2px;
+  box-shadow:0 20px 55px rgba(100,16,30,.07)
+}
+.about>div{background:#fff;color:#64101e}
+.about>div:first-child{background:#64101e;color:#fff}
+.about h2{color:#fff}
+.about p:not(.eyebrow){color:#6d5558}
+.about>div:first-child p:not(.eyebrow){color:#fff}
+.about strong{color:#b8872c}
+.values span{border-color:rgba(184,135,44,.35);color:#64101e}
+.featured{background:#64101e!important;color:#fff}
+.featured p,.featured h2,.featured h3{color:#fff}
+.featured>a,.signature{color:#f0cf79!important}
+.program-section,.team-section{color:#64101e}
+.section-heading h2,.team-intro h2{color:#64101e}
+.section-heading p:last-child,.team-intro p:last-child{color:#6d5558}
+.cards button{
+  background:#fff;color:#64101e;border:1px solid rgba(184,135,44,.5);
+  box-shadow:0 12px 35px rgba(100,16,30,.08);
+}
+.cards button:before{background:#d6a84f}
+.cards button:hover{border-color:#b8872c;box-shadow:0 20px 42px rgba(100,16,30,.14)}
+.cards small{color:#8f1b30}
+.cards i{color:#b8872c}
+.cards h2{color:#64101e}
+.cards h3{color:#8f1b30}
+.cards p{color:#6d5558}
+.cards strong{color:#8f1b30}
+.team-card{background:#fff;color:#64101e;border:1px solid rgba(184,135,44,.48);box-shadow:0 10px 28px rgba(100,16,30,.07)}
+.team-card:before{background:#d6a84f}
+.team-card:hover{border-color:#b8872c;box-shadow:0 18px 36px rgba(100,16,30,.13)}
+.team-number{color:#8f1b30}
+.team-icon{border-color:rgba(184,135,44,.55);background:#fffaf4;color:#8f1b30}
+.team-card strong{color:#64101e}
+.team-card small{color:#8f1b30}
+.team-card em{color:#6d5558}
+.member-backdrop{background:rgba(48,5,13,.72)}
+.member-panel{background:#fff;color:#64101e;border:1px solid #d6a84f;box-shadow:0 35px 90px rgba(48,5,13,.22)}
+.member-panel h2{color:#64101e}
+.member-panel h3{color:#8f1b30}
+.member-panel>p:not(.eyebrow){color:#6d5558}
+.member-focus{border-left-color:#d6a84f;background:#fffaf4}
+.member-focus span{color:#8f1b30}
+.member-focus strong{color:#64101e}
+.panel{background:#fff;color:#64101e;border:1px solid rgba(184,135,44,.55);box-shadow:0 22px 55px rgba(100,16,30,.1)}
+.panel h2{color:#64101e}
+.panel>p{color:#6d5558}
+.panel>#kind{color:#8f1b30}
+label{color:#64101e}
+input,select,textarea{background:#fff;color:#64101e;border:1px solid #d8c8a6}
+input:focus,select:focus,textarea:focus{outline:2px solid rgba(214,168,79,.3);border-color:#b8872c}
+form button{background:#d6a84f;color:#64101e}
+#back{color:#8f1b30}
+#success{border-color:#d6a84f;color:#64101e;background:#fffaf4}
+.site-footer{background:#64101e;border-top:3px solid #d6a84f;color:#fff}
+.footer-brand strong,.footer-column h3,.footer-access h3{color:#f0cf79}
+.footer-brand span,.footer-brand p,.footer-access p,.footer-column a{color:#fff}
+.footer-column a:hover{color:#f0cf79}
+.footer-login{border-color:#f0cf79;color:#fff}
+.footer-login:hover{background:#d6a84f;color:#64101e}
+.footer-bottom{border-top-color:rgba(240,207,121,.25);color:#fff}
+@media(max-width:700px){
+  .about{background:#d6a84f}
+  .about>div{background:#fff}
+  .about>div:first-child{background:#64101e}
+  .section-heading p:last-child,.team-intro p:last-child{color:#6d5558}
+  .cards button{background:#fff}
+}
