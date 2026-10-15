@@ -430,3 +430,21 @@ header .brand-logo img,
 header .brand-wordmark::after,
 header .brand-wordmark svg,
 header .brand-logo .brand-icon{display:none!important;content:none!important}
+
+
+/* Conteúdo institucional expandido — filosofia do 95 e perfil do fundador */
+.method-block{margin-top:2rem;padding:1.5rem;border-left:2px solid var(--gold,#b9975b);background:rgba(185,151,91,.07)}
+.method-block h3{font-family:"Playfair Display",serif;margin:.25rem 0 .75rem;font-size:clamp(1.35rem,2.2vw,1.8rem)}
+.method-block p:last-child{margin-bottom:0}
+.founder-section{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(220px,.7fr);gap:clamp(2rem,5vw,5rem);align-items:center;padding:clamp(3rem,7vw,6rem) max(6vw,calc((100% - 1200px)/2));background:#111;color:#f6f3ee}
+.founder-section h2{font-family:"Playfair Display",serif;font-size:clamp(2rem,4vw,3.5rem);margin:.35rem 0 1rem}
+.founder-role{color:#d8bd83;font-weight:600;line-height:1.6}
+.founder-copy>p{line-height:1.8;max-width:70ch}
+.founder-copy blockquote{margin:2rem 0 0;padding:1.25rem 1.5rem;border-left:2px solid #c6a76a;color:#f3e5c7;font-family:"Playfair Display",serif;font-size:1.2rem;line-height:1.65}
+.founder-copy blockquote span{display:block;margin-top:.75rem;font-family:Inter,sans-serif;font-size:.85rem;font-style:normal;color:#d8bd83}
+.founder-note{border:1px solid rgba(198,167,106,.45);padding:2rem;text-align:center}
+.founder-mark{display:block;font-family:"Playfair Display",serif;font-size:clamp(5rem,10vw,8rem);line-height:1;color:#d8bd83}
+.founder-note p{line-height:1.7}
+.founder-note .values{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem}
+.founder-note .values span{font-size:.68rem;letter-spacing:.08em;border:1px solid rgba(198,167,106,.4);padding:.5rem}
+@media(max-width:760px){.founder-section{grid-template-columns:1fr}.founder-note{max-width:100%}.method-block{padding:1.1rem}}
