@@ -872,3 +872,57 @@ body:has(.intro) .about .method-block {
 @media(max-width:360px) {
   #signup .days { grid-template-columns: minmax(0, 1fr); }
 }
+
+
+/* CHECKBOXES DO FORMULARIO DE SERVICOS — alinhamento robusto, incluindo Setup */
+.service-page .check {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 14px 15px !important;
+  margin: 0 !important;
+  text-align: left !important;
+  line-height: 1.55 !important;
+  cursor: pointer;
+}
+.service-page .check input[type="checkbox"] {
+  display: block !important;
+  flex: 0 0 19px !important;
+  width: 19px !important;
+  height: 19px !important;
+  min-width: 19px !important;
+  min-height: 19px !important;
+  margin: 2px 0 0 !important;
+  padding: 0 !important;
+  accent-color: #64101e !important;
+  cursor: pointer;
+}
+.service-page .check span {
+  display: block !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  color: #49343a !important;
+  text-align: left !important;
+  line-height: 1.55 !important;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+.service-page .check:has(input:checked) {
+  background: #f8efdc !important;
+  border-color: #b58a3b !important;
+}
+.service-page #serviceRequest {
+  scroll-margin-top: 125px;
+}
+@media(max-width:600px) {
+  .service-page .check {
+    align-items: flex-start !important;
+    gap: 11px !important;
+    padding: 13px 12px !important;
+  }
+}
