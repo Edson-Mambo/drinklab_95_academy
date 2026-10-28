@@ -535,3 +535,102 @@ body:has(.posts-page) {
 .portal-card:hover, .service-option:hover {
   background-color: #fbf5e9 !important;
 }
+
+
+/* ACABAMENTO FINAL — corrigir texto branco sobre dourado claro e melhorar leitura */
+.about .featured {
+  background: #64101e !important;
+  color: #fffdf9 !important;
+  border-color: #b58a3b !important;
+}
+.about .featured h2,
+.about .featured h3,
+.about .featured p,
+.about .featured blockquote,
+.about .featured .signature {
+  color: #fffdf9 !important;
+}
+.about .featured .eyebrow,
+.about .featured strong,
+.about .featured > a {
+  color: #e8cf91 !important;
+}
+.about .featured a {
+  text-decoration-color: #e8cf91 !important;
+}
+.method-block {
+  background: #f7f1e6 !important;
+  border-left: 3px solid #b58a3b !important;
+  color: #32151b !important;
+}
+.method-block h3,
+.method-block strong {
+  color: #54101d !important;
+}
+.method-block p {
+  color: #59464a !important;
+}
+/* Retirar a justificação generalizada: evita espaços irregulares entre palavras */
+body p,
+body li:not(header nav li),
+body blockquote,
+body dd,
+body td,
+body .about,
+body .about p,
+body .intro p,
+body .description,
+body .post-content,
+body .article-content,
+body .service-content,
+body .program-section p,
+body .team-section p,
+body .card p,
+body .content-text,
+body .founder-copy > p,
+body .method-block p {
+  text-align: left !important;
+  text-justify: auto !important;
+  text-align-last: auto !important;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+body p {
+  line-height: 1.75;
+}
+.about p,
+.program-section p,
+.team-section p,
+.founder-copy > p,
+.method-block p,
+.post p,
+.service-content p,
+.article-content p {
+  max-width: 72ch;
+  margin-top: .65em;
+  margin-bottom: 1em;
+}
+.intro p,
+.about .featured p,
+.founder-copy blockquote,
+.site-footer p,
+header nav a,
+button,
+label,
+.tablewrap td,
+.tablewrap th {
+  max-width: none;
+}
+@media(max-width:700px) {
+  body p { line-height: 1.7; }
+  .about p,
+  .program-section p,
+  .team-section p,
+  .founder-copy > p,
+  .method-block p,
+  .post p,
+  .service-content p,
+  .article-content p {
+    max-width: none;
+  }
+}
