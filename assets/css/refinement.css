@@ -366,3 +366,101 @@ body button,body label,body input,body select,body textarea,body th,body .eyebro
 body .post-meta,body .post-author,body .notice-badge,body nav a{
   text-align:initial;
 }
+
+
+/* Correcção de contraste reforçada — cobre textos herdados e elementos dinâmicos */
+body:has(.access-page),body:has(.admin),body:has(.trainer-page),
+body:has(.service-page),body:has(.posts-page){
+  color:#32151b!important;
+}
+.access-page *, .admin *, .trainer-page *, .service-page *, .posts-page *{
+  text-shadow:none;
+}
+.access-page .access-box p,.access-page .access-box label,
+.access-page .portal-card span,.access-page .portal-card small,
+.access-page .access-roles small,.access-page .access-roles em,
+.admin .box p,.admin .box label,.admin .hint,.admin .admin-subtitle,
+.admin .trainer-card,.admin .trainer-card p,.admin .trainer-card small,
+.admin .site-media-info,.admin .site-media-info small,
+.trainer-page .trainer-welcome p,.trainer-page .trainer-note p,
+.trainer-page .panel p,.trainer-page .hint,.trainer-page .empty,
+.trainer-page .post-card p,.service-page .service-option p,
+.service-page .service-head p,.service-page .service-form label,
+.service-page .check,.service-page .notice,
+.posts-page .posts-head p,.posts-page .post p,.posts-page .post-author,
+.posts-page .post-meta,.posts-page .empty{
+  color:#59464a!important;
+  opacity:1!important;
+}
+.access-page .access-box h1,.access-page .access-box h2,
+.admin .section-title,.admin .box h2,.admin .dash h1,
+.trainer-page .trainer-hero h1,.trainer-page .section-title,
+.trainer-page .panel h2,.trainer-page .trainer-welcome h2,
+.trainer-page .trainer-note h2,.trainer-page .post-card h3,
+.service-page .service-head h1,.service-page .service-option h2,
+.service-page .service-form h2,.posts-page .posts-head h1,
+.posts-page .post h2{
+  color:#54101d!important;
+  opacity:1!important;
+}
+.admin .stat,.admin .notice,.admin .site-media-card,
+.admin .trainer-card,.trainer-page .stat,.trainer-page .notice,
+.trainer-page .post-card,.posts-page .post,.posts-page .empty{
+  background:#fffefa!important;
+  color:#32151b!important;
+  border-color:#dfd0b2!important;
+}
+.admin .stat *,.trainer-page .stat *,.admin .notice *,
+.trainer-page .notice *, .admin .site-media-card *{
+  color:#59464a!important;
+}
+.admin .stat b,.trainer-page .stat b,.admin .notice strong,
+.trainer-page .notice strong,.admin .site-media-info strong{
+  color:#54101d!important;
+}
+.access-page .access-header,.posts-page>header,.trainer-page>header{
+  color:#fff!important;
+}
+.access-page .access-header *, .posts-page>header *,
+.trainer-page>header *{
+  color:#fff!important;
+}
+.access-page .access-header .brand-wordmark em,
+.posts-page>header .brand-wordmark em,
+.trainer-page>header .brand-wordmark em{
+  background:none!important;
+  -webkit-text-fill-color:#e8cf91!important;
+  color:#e8cf91!important;
+}
+.access-page .access-form input,.access-page .access-form label,
+.admin input,.admin select,.admin textarea,
+.trainer-page input,.trainer-page select,.trainer-page textarea,
+.service-page input,.service-page select,.service-page textarea{
+  color:#32151b!important;
+  -webkit-text-fill-color:#32151b;
+  background:#fffefa!important;
+}
+.access-page input::placeholder,.admin input::placeholder,
+.admin textarea::placeholder,.trainer-page input::placeholder,
+.trainer-page textarea::placeholder,.service-page input::placeholder,
+.service-page textarea::placeholder{
+  color:#655257!important;
+  -webkit-text-fill-color:#655257;
+  opacity:1!important;
+}
+.access-page .error,.admin .error,.trainer-page .error,
+.service-page .error{color:#a21d2d!important}
+.posts-page .back,.service-page .back-home,
+.admin .admin-site-link,.trainer-page .footer-login{
+  color:#7b1728!important;
+}
+@media(prefers-color-scheme:dark){
+  .access-page .access-box,.admin .box,.admin .stat,.admin .notice,
+  .admin .site-media-card,.admin .trainer-card,.trainer-page .panel,
+  .trainer-page .stat,.trainer-page .notice,.trainer-page .post-card,
+  .service-page .service-option,.service-page .service-form,
+  .posts-page .post{
+    color:#32151b!important;
+    background:#fffefa!important;
+  }
+}
