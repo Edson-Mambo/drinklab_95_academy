@@ -269,3 +269,25 @@ body:has(.intro):before{
 }
 .program-section,.team-section{color:var(--dl-ink)}
 .site-footer{color:#fff}
+
+/* Alinhamento editorial: texto corrido justificado em todo o site */
+body p,
+body li:not(header nav li),
+body blockquote,
+body dd,
+body td,
+body .about,
+body .about p,
+body .intro p,
+body .description,
+body .post-content,
+body .article-content,
+body .service-content,
+body .program-section p,
+body .team-section p,
+body .card p,
+body .content-text {
+  text-align: justify;
+  text-justify: inter-word;
+  text-align-last: auto;
+}
