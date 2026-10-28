@@ -634,3 +634,41 @@ label,
     max-width: none;
   }
 }
+
+
+/* CORRECCAO DIRECTA — texto institucional legivel no iPhone */
+body:has(.intro) .about > div,
+body:has(.intro) .about > div:first-child,
+body:has(.intro) .about .method-block {
+  color: #32151b !important;
+  -webkit-text-fill-color: #32151b;
+  opacity: 1 !important;
+}
+body:has(.intro) .about > div:not(.featured) p:not(.eyebrow),
+body:has(.intro) .about > div:not(.featured) p:not(.eyebrow) *,
+body:has(.intro) .about .method-block p:not(.eyebrow),
+body:has(.intro) .about .method-block p:not(.eyebrow) * {
+  color: #59464a !important;
+  -webkit-text-fill-color: #59464a !important;
+  opacity: 1 !important;
+}
+body:has(.intro) .about > div:not(.featured) strong,
+body:has(.intro) .about .method-block strong {
+  color: #54101d !important;
+  -webkit-text-fill-color: #54101d !important;
+}
+body:has(.intro) .about .eyebrow,
+body:has(.intro) .about .method-block .eyebrow {
+  color: #8a6726 !important;
+  -webkit-text-fill-color: #8a6726 !important;
+}
+body:has(.intro) .about .values span {
+  color: #54101d !important;
+  -webkit-text-fill-color: #54101d !important;
+  background: #fff8e8 !important;
+  border-color: #b88a36 !important;
+}
+body:has(.intro) .about .method-block {
+  background: #f7f1e6 !important;
+  border-left: 3px solid #b88a36 !important;
+}
