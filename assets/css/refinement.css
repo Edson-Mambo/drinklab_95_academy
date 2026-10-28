@@ -291,3 +291,78 @@ body .content-text {
   text-justify: inter-word;
   text-align-last: auto;
 }
+
+
+/* Terceira passagem — contraste e legibilidade dos textos */
+:root{
+  --dl-text-strong:#32151b;
+  --dl-text-body:#59464a;
+  --dl-text-muted:#655257;
+  --dl-border-soft:#dfd0b2;
+}
+/* Texto em cartões e superfícies claras: nunca usar dourado claro como texto corrido */
+.access-box,.box,.trainer-welcome,.trainer-note,.panel,.service-form,.post,.post-card,
+.stat,.site-media-card,.notice,.portal-card,.access-roles button,.action,.service-option,
+.check,.hygiene-note{
+  color:var(--dl-text-strong)!important;
+}
+.access-box p,.box p,.trainer-welcome p,.trainer-note p,.panel p,
+.service-form p,.post p,.post-card p,.stat span,.site-media-card small,
+.notice small,.portal-card span,.access-roles small,.access-roles em,
+.action p,.service-option p,.check span,.hygiene-note{
+  color:var(--dl-text-body)!important;
+}
+.portal-card small,.access-roles span,.service-option small,
+.post-meta,.post-author,.notice-badge{
+  color:#7b1728!important;
+}
+.portal-card strong,.access-roles strong,.action strong,.service-option h2,
+.access-box h1,.access-box h2,.box h2,.panel h2,.trainer-welcome h2,
+.trainer-note h2,.post h2,.post-card h3,.notice strong,.site-media-info strong{
+  color:#54101d!important;
+}
+.portal-card,.access-roles button,.action,.service-option,.post-card{
+  background:#fffefa!important;
+  border-color:var(--dl-border-soft)!important;
+}
+.portal-card:hover,.access-roles button:hover,.action:hover,.service-option:hover{
+  border-color:#b88a36!important;
+  box-shadow:0 12px 30px rgba(53,11,20,.10)!important;
+}
+.notice,.stat,.site-media-card{
+  background:#fffefa!important;
+  border-color:var(--dl-border-soft)!important;
+}
+.site-media-preview{color:#59464a!important;background:#f6f1e8!important}
+.site-media-info small{color:#655257!important}
+.trainer-card{
+  background:#fffefa!important;
+  border:1px solid var(--dl-border-soft)!important;
+  color:var(--dl-text-strong)!important;
+}
+.trainer-card strong{color:#54101d!important}
+.trainer-card small{color:#7b1728!important}
+.trainer-actions button{color:#7b1728!important;border-color:#b88a36!important}
+.trainer-actions .delete{color:#9b2634!important}
+.values span{color:#54101d!important;background:#fff8e8!important}
+.header-status{color:#fff!important}
+.access-back,.back-home,.back,.footer-login,.admin-site-link{
+  color:#7b1728!important;
+}
+.error{color:#a21d2d!important}
+input,select,textarea{color:#32151b!important}
+input::placeholder,textarea::placeholder{color:#655257!important;opacity:1!important}
+/* Estados e mensagens devem manter contraste mesmo após alterações de tema */
+#success,.success,.notice[role="status"]{
+  color:#32151b!important;
+}
+#success p,#success span,.success p,.success span{color:#32151b!important}
+@media(max-width:700px){
+  .portal-card,.access-roles button,.service-option,.action{padding:22px!important}
+  .portal-card span,.access-roles small,.access-roles em,.service-option p,.post p{line-height:1.7}
+}
+/* Justificação apenas no texto corrido; elementos de interface preservam alinhamento natural */
+body button,body label,body input,body select,body textarea,body th,body .eyebrow,
+body .post-meta,body .post-author,body .notice-badge,body nav a{
+  text-align:initial;
+}
