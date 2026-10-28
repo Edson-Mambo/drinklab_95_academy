@@ -926,3 +926,29 @@ body:has(.intro) .about .method-block {
     padding: 13px 12px !important;
   }
 }
+
+
+/* Setup de Coffee Shop: aproximar cada descrição à respectiva caixa */
+.service-page #checkGrid .check {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  column-gap: 5px !important;
+  gap: 5px !important;
+}
+.service-page #checkGrid .check input[type="checkbox"] {
+  flex: 0 0 16px !important;
+  width: 16px !important;
+  min-width: 16px !important;
+  height: 16px !important;
+  min-height: 16px !important;
+  margin: 2px 0 0 !important;
+}
+.service-page #checkGrid .check span {
+  flex: 0 1 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+}
