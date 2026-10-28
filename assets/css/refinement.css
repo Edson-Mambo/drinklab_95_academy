@@ -1,0 +1,150 @@
+/* DrinkLab 95 — camada de acabamento visual e responsivo
+   Paleta oficial: vermelho, dourado e branco.
+   Esta camada complementa os estilos existentes sem alterar dados ou lógica. */
+:root{
+  --dl-red:#8b1e2d;
+  --dl-red-dark:#64101e;
+  --dl-red-deep:#4b101b;
+  --dl-gold:#b58a3b;
+  --dl-gold-light:#e3c77e;
+  --dl-white:#fffdf8;
+  --dl-paper:#f8f4ec;
+  --dl-ink:#32151b;
+  --dl-muted:#6d5b5d;
+}
+html{scroll-padding-top:120px}
+body{overflow-x:clip}
+img,video,iframe{max-width:100%}
+button,input,select,textarea{font:inherit}
+a,button,input,select,textarea{ -webkit-tap-highlight-color:transparent }
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:3px solid var(--dl-gold-light)!important;
+  outline-offset:3px!important;
+}
+button:disabled{opacity:.65;cursor:wait}
+::selection{background:var(--dl-gold-light);color:var(--dl-ink)}
+/* Cabeçalho partilhado */
+header{
+  border-color:rgba(227,199,126,.55);
+  background:rgba(100,16,30,.96);
+  box-shadow:0 12px 34px rgba(57,8,18,.2);
+}
+header nav a{color:#fff}
+header nav a:hover,header nav a:focus-visible{color:var(--dl-gold-light)}
+.brand-wordmark{color:#fff}
+.brand-wordmark em{background:linear-gradient(135deg,#fff0b5,#b58a3b 55%,#f0d58c);-webkit-background-clip:text;background-clip:text;color:transparent}
+/* Páginas institucionais e cartões */
+.about>div,.founder-section,.featured{scroll-margin-top:120px}
+.cards button,.team-card,.portal-card,.access-roles button,.action,.service-option{
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease,background-color .2s ease;
+}
+.cards button:focus-visible,.team-card:focus-visible,.portal-card:focus-visible,.service-option:focus-visible{
+  outline:3px solid var(--dl-gold)!important;outline-offset:3px!important;
+}
+.program-visual img,.section-art img,.service-visual{max-width:100%;object-fit:cover}
+.site-footer{background:var(--dl-red-dark);border-top:2px solid var(--dl-gold)}
+.footer-brand strong,.footer-column h3,.footer-access h3{color:var(--dl-gold-light)}
+.footer-bottom{color:#fff}
+.footer-column a,.footer-brand p,.footer-brand span,.footer-access p{color:#fff}
+/* Portal, administração, formadores e serviços: superfícies claras com acentos vermelhos */
+body:has(.access-page),body:has(.admin),body:has(.trainer-page),body:has(.service-page),body:has(.posts-page){
+  background:var(--dl-paper)!important;color:var(--dl-ink);
+}
+body:has(.access-page):before,body:has(.admin):before,body:has(.trainer-page):before,
+body:has(.service-page):before,body:has(.posts-page):before{display:none}
+.access-header,.admin-header,body:has(.trainer-page)>header,body:has(.posts-page)>header{
+  background:var(--dl-red-dark)!important;border:1px solid rgba(181,138,59,.75)!important;
+  color:#fff!important;box-shadow:0 10px 28px rgba(57,8,18,.16)!important;
+}
+.access-header small,.admin-kicker{color:#f0dca8!important}
+.header-status,.admin-live{color:#fff!important}
+.access-page,.admin,.trainer-page,.service-page,.posts-page{color:var(--dl-ink)}
+.access-box,.box,.trainer-welcome,.trainer-note,.panel,.service-form,.post,.post-card{
+  background:var(--dl-white)!important;color:var(--dl-ink)!important;
+  border:1px solid #e2d4b6!important;box-shadow:0 12px 32px rgba(75,16,27,.07);
+}
+.access-box h1,.dash h1,.trainer-hero h1,.section-title,.service-head h1,.posts-head h1,
+.access-box h2,.box h2,.panel h2,.trainer-welcome h2,.trainer-note h2,.post h2,.post-card h3{
+  color:var(--dl-red-dark);
+}
+.access-box p,.admin-subtitle,.trainer-page p,.service-head p,.service-option p,.posts-head p,.post p,.post-card p{
+  color:var(--dl-muted);
+}
+.portal-card,.access-roles button,.action,.service-option{
+  background:#fff!important;color:var(--dl-ink)!important;border:1px solid #e0c98f!important;
+}
+.portal-card strong,.access-roles strong,.action strong,.service-option h2{color:var(--dl-red-dark)!important}
+.portal-card small,.access-roles span,.service-option small{color:var(--dl-gold)!important}
+.portal-card span,.access-roles small,.access-roles em{color:var(--dl-muted)!important}
+.stat,.site-media-card,.notice,.post-card{
+  background:#fff!important;border-color:#e2d4b6!important;color:var(--dl-ink)!important;
+}
+.stat b,.tablewrap th,.student-wrap th,.post-meta,.post-author{color:var(--dl-red)!important}
+.tablewrap,.student-wrap{max-width:100%;overflow-x:auto;border-color:#e2d4b6!important}
+.tablewrap th,.tablewrap td,.student-wrap th,.student-wrap td{border-bottom-color:#eee5d5!important}
+.box label,.trainer-page label,.service-form label{color:var(--dl-ink)!important}
+.box input,.box select,.box textarea,.composer input,.composer select,.composer textarea,
+.access-form input,.service-form input,.service-form textarea,.service-form select,
+input,select,textarea{
+  background:#fff;color:var(--dl-ink);border:1px solid #d8c49a;
+}
+input::placeholder,textarea::placeholder{color:#8a7778;opacity:1}
+.goldbtn,form button,.access-form>button[type=submit]{
+  background:var(--dl-gold)!important;color:#32151b!important;border:1px solid var(--dl-gold)!important;
+}
+.goldbtn:hover,form button:hover,.access-form>button[type=submit]:hover{background:var(--dl-gold-light)!important}
+.footer-login,.admin-site-link,.back-home,.back,.access-back{color:var(--dl-red)!important}
+.error{color:#a21d2d!important}
+.empty,.hint{color:var(--dl-muted)!important}
+.service-page{background:var(--dl-paper)!important;color:var(--dl-ink)!important}
+.service-option.active{background:#fff8e8!important;border-color:var(--dl-gold)!important}
+.check{background:#fff!important;color:var(--dl-ink)!important;border-color:#e2d4b6!important}
+.hygiene-note{background:#fff6e4!important;color:var(--dl-ink)!important;border-left-color:var(--dl-gold)!important}
+.post{overflow:hidden!important;border-radius:12px!important}
+.post-media{width:100%;height:auto;max-height:520px;object-fit:cover}
+.post-body{background:#fff!important}
+.notice-badge{border-color:var(--dl-gold)!important;color:var(--dl-red)!important;border-radius:4px!important}
+.site-footer a:focus-visible{outline-color:var(--dl-gold-light)!important}
+/* Breakpoints: grelhas flexíveis, navegação utilizável e sem transbordo lateral */
+@media(max-width:1050px){
+  header nav{max-width:100%;overscroll-behavior-x:contain}
+  .footer-main{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  html{scroll-padding-top:145px}
+  .founder-section{grid-template-columns:1fr}
+  .posts-grid{grid-template-columns:1fr}
+  .service-options,.check-grid{grid-template-columns:1fr}
+  .trainer-content,.actions{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .admin-hero{align-items:flex-start;flex-direction:column}
+  .footer-main{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;line-height:1.7}
+  .service-page{padding:105px 18px 50px!important}
+  .posts-page{padding:110px 14px 50px!important}
+  .admin{padding-left:14px!important;padding-right:14px!important}
+  .trainer-page{padding:105px 14px 40px!important}
+  .access-page{padding:105px 12px 35px!important}
+  .access-header>div{display:none}
+  .access-header{top:8px!important;width:calc(100% - 16px)!important;left:8px!important;transform:none!important}
+  .admin-header{top:8px!important;width:calc(100% - 16px)!important}
+  .service-head p,.service-option p,.hygiene-note{text-align:left}
+  .service-form{padding:20px!important}
+  .post-body{padding:18px}
+}
+@media(max-width:480px){
+  .cards{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr}
+  .portal-info,.access-roles{grid-template-columns:1fr}
+  .site-media-grid{grid-template-columns:1fr}
+  .admin-header-center,.admin-live{display:none}
+  .admin-header-actions{margin-left:auto}
+  .access-box{padding:30px 17px!important}
+  .service-option{padding:20px!important}
+  .post h2{font-size:22px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
