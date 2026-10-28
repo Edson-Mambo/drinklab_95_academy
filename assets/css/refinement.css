@@ -464,3 +464,74 @@ body:has(.service-page),body:has(.posts-page){
     background:#fffefa!important;
   }
 }
+
+
+/* AJUSTE DE FUNDOS — separação clara entre texto e superfícies
+   Conteúdo geral claro; vermelho escuro apenas em áreas de destaque.
+   Mantém o hero, rodapé e bloco do fundador como superfícies escuras intencionais. */
+html, body {
+  background-color: #fffdf9 !important;
+  color: #32151b !important;
+}
+body:before {
+  background: none !important;
+  opacity: 1 !important;
+}
+body:has(.intro) {
+  background: #f7f3eb !important;
+}
+body:has(.intro) > main,
+body:has(.intro) main,
+body:has(.intro) .program-section,
+body:has(.intro) .team-section,
+body:has(.intro) #form {
+  background-color: #f7f3eb !important;
+  color: #32151b !important;
+}
+body:has(.access-page),
+body:has(.admin),
+body:has(.trainer-page),
+body:has(.service-page),
+body:has(.posts-page) {
+  background: #f7f3eb !important;
+}
+.access-page, .admin, .trainer-page, .service-page, .posts-page {
+  background-color: transparent !important;
+}
+.access-box, .access-form, .box, .panel, .trainer-welcome,
+.trainer-note, .service-form, .post, .post-card, .portal-card,
+.access-roles button, .action, .service-option, .stat, .notice,
+.site-media-card, .trainer-card, .check, .empty {
+  background-color: #fff !important;
+  color: #32151b !important;
+  border-color: #e2d6c2 !important;
+  background-image: none !important;
+}
+.access-box, .box, .panel, .trainer-welcome, .trainer-note,
+.service-form, .post, .post-card {
+  box-shadow: 0 5px 18px rgba(50,21,27,.045) !important;
+}
+.about > div:not(.featured) {
+  background-color: #fffdf9 !important;
+}
+.about > div:first-child {
+  background-color: #64101e !important;
+}
+.about .featured {
+  background-color: #f5eee2 !important;
+}
+.founder-section {
+  background-color: #21171a !important;
+  color: #f6f1e8 !important;
+}
+.site-footer {
+  background-color: #32151b !important;
+}
+.access-header, .admin-header, .posts-page > header,
+.trainer-page > header {
+  background-color: #64101e !important;
+}
+.service-option.active, .access-roles button:hover,
+.portal-card:hover, .service-option:hover {
+  background-color: #fbf5e9 !important;
+}
